@@ -2,6 +2,8 @@
 
 
 Rails.application.routes.draw do
+  get 'article/show'
+
   get 'articles/new'
 
   # tells Rails to map requests to http://localhost:3000/welcome/index to the welcome controller's index action

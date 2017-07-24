@@ -1,6 +1,9 @@
 class ArticlesController < ApplicationController
-  def show
+  def index
+    @articles = Article.all
+  end
 
+  def show
     # using instance variable to store the article found by id.
     # Rails passes all instance variables to the view
     @article = Article.find(params[:id])

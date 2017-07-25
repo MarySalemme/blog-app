@@ -1,5 +1,25 @@
 <h1>New Article</h1>
 <%= form_for :article, url: articles_path do |f| %>
+
+  <!-- checking if there are any errors -->
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <!-- pluralize is a Rails helper that takes a number and a string as its arguments -->
+        <!-- if the number is greater than one, the string will be automatically pluralized -->
+        <%= pluralize(@article.errors.count, "error") %>
+prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <!-- if there are any errors, we show a list with them -->
+        <% @article.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <p>
     <%= f.label :title %><br>
     <%= f.text_field :title %>
@@ -14,3 +34,5 @@
     <%= f.submit %>
   </p>
 <% end %>
+
+<%= link_to 'Back', articles_path %>

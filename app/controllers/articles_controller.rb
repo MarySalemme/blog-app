@@ -10,7 +10,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
-
+    @article = Article.new
   end
 
   def create
@@ -19,10 +19,14 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
 
     # the below is responsible for saving the model in the database
-    @article.save
-
-    # redirect the user to the show action
-    redirect_to @article
+    if @article.save
+      # redirect the user to the show action
+      redirect_to @article
+    else
+      # we use render and not redirect so that the @article object is passed back to the new template
+      #  when it's rendered, whereas 'redirect' tells the browser to issue another request
+      render 'new'
+    end
   end
 
   # Whitelisting controller parameters to prevent wrong mass assignment

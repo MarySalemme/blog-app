@@ -1,7 +1,7 @@
 # created with: $bin/rails generate model article title:string text:text
 
 class Article < ApplicationRecord
-  has_many :comments
+  has_many :comments, dependent: destroy
   # the class Article inherits data validation from ApplicationRecord, which inherits from ActiveRecord
   validates :title, presence: true,
                     length: { minimum: 5 }

@@ -13,6 +13,10 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
+  def edit
+    @article = Article.find(params[:id])
+  end
+
   def create
     # initializing Rails model with its respective attributes, which is automatically mapped to the
     # respective database columns
@@ -26,6 +30,18 @@ class ArticlesController < ApplicationController
       # we use render and not redirect so that the @article object is passed back to the new template
       #  when it's rendered, whereas 'redirect' tells the browser to issue another request
       render 'new'
+    end
+  end
+
+  def update
+    @article = Article.find(params[:id])
+
+    # the method update is used to update a record that already exists
+    # it accepts a hash containing the attributes that need updating
+    if @article.update(article_params)
+      redirect_to @article
+    else
+      render 'edit'
     end
   end
 
